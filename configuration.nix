@@ -56,6 +56,10 @@
     variant = "";
   };
 
+  # Enable proprietary NVIDIA drivers.
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.open = true;
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
