@@ -57,7 +57,10 @@
   };
 
   # Enable proprietary NVIDIA drivers.
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [
+    "modesetting"
+    "nvidia"
+  ];
   hardware.nvidia.open = true;
 
   # Configure NVIDIA Optimus.
