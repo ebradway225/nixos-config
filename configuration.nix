@@ -60,6 +60,12 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
 
+  # Configure NVIDIA Optimus.
+  hardware.nvidia.prime = {
+    intelBusId = "PCI:1:0:0";
+    nvidiaBusId = "PCI:0:2:0";
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
