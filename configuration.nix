@@ -114,7 +114,6 @@
     description = "Ethan Bradway";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-      google-chrome
       kdePackages.kate
     #  thunderbird
     ];
