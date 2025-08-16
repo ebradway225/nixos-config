@@ -14,6 +14,7 @@
 
   home.packages = with pkgs; [
     google-chrome
+    kdePackages.kate
   ];
 
   # This value determines the Home Manager release that your
