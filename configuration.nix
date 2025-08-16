@@ -115,7 +115,6 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       google-chrome
-      git
       kdePackages.kate
     #  thunderbird
     ];
@@ -123,9 +122,6 @@
 
   # Install firefox.
   programs.firefox.enable = true;
-
-  # Install git
-  programs.git.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
