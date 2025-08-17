@@ -12,6 +12,10 @@
     userEmail = "ebradway225@gmail.com";
   };
 
+  programs.jujutsu = {
+    enable = true;
+  };
+
   # Enable bash intregration.
   programs.bash.enable = true;
 
