@@ -155,9 +155,17 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+  environment.systemPackages = with pkgs; let
+    patchDesktop = pkg: appName: from: to: lib.hiPrio (
+      pkgs.runCommand "$patched-desktop-entry-for-${appName}" {} ''
+        ${coreutils}/bin/mkdir -p $out/share/applications
+        ${gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop
+        '');
+    GPUOffloadApp = pkg: desktopName: patchDesktop pkg desktopName "^Exec=" "Exec=nvidia-offload ";
+    in [
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
+      (GPUOffloadApp steam "steam")
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
