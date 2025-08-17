@@ -12,6 +12,12 @@
     userEmail = "ebradway225@gmail.com";
   };
 
+  # Enable bash intregration.
+  programs.bash.enable = true;
+
+  # Install fzf.
+  programs.fzf.enable = true;
+
   home.packages = with pkgs; [
     google-chrome
     kdePackages.kate
