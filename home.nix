@@ -14,6 +14,12 @@
 
   programs.jujutsu = {
     enable = true;
+    settings = {
+      user = {
+        name = "Ethan Bradway";
+        email = "ebradway225@gmail.com";
+      };
+    };
   };
 
   # Enable bash intregration.
