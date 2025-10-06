@@ -3,13 +3,22 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
+
+    alejandra.url = "github:kamadorueda/alejandra/4.0.0";
+    alejandra.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = inputs @ {
+    alejandra,
+    nixpkgs,
+    home-manager,
+    ...
+  }: {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      nixos = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
@@ -21,6 +30,8 @@
 
             # Optionally, use home-manager.extraSpecialArgs to pass
             # arguments to home.nix
+
+            environment.systemPackages = [alejandra.defaultPackage.${system}];
           }
         ];
       };
