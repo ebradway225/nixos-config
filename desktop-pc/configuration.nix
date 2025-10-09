@@ -59,7 +59,6 @@
 
   # Enable proprietary NVIDIA drivers.
   services.xserver.videoDrivers = [
-    "modesetting"
     "nvidia"
   ];
 
