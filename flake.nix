@@ -39,6 +39,8 @@
           }
         ];
       };
+
+      # nixos-anywhere --flake .#desktop-pc --generate-hardware-config nixos-generate-config ./desktop-pc/hardware-configuration.nix desktop-pc
       desktop-pc = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
