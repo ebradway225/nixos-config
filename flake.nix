@@ -16,6 +16,7 @@
 
   outputs = inputs @ {
     alejandra,
+    disko,
     nixpkgs,
     home-manager,
     ...
@@ -42,6 +43,7 @@
         system = "x86_64-linux";
         modules = [
           ./desktop-pc/configuration.nix
+          disko.nixosModules.disko
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
