@@ -18,10 +18,27 @@
     ...
   }: {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem rec {
+      asus-gaming-laptop = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
         modules = [
           ./asus-gaming-laptop/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.ethanb = ./home.nix;
+
+            # Optionally, use home-manager.extraSpecialArgs to pass
+            # arguments to home.nix
+
+            environment.systemPackages = [alejandra.defaultPackage.${system}];
+          }
+        ];
+      };
+      desktop-pc = nixpkgs.lib.nixosSystem rec {
+        system = "x86_64-linux";
+        modules = [
+          ./desktop-pc/configuration.nix
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
