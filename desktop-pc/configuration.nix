@@ -9,6 +9,9 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    # Import disko configuration.
+    ./disk-config.nix
   ];
 
   # Bootloader.
