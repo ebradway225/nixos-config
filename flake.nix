@@ -57,6 +57,7 @@
 
             environment.systemPackages = [alejandra.defaultPackage.${system}];
           }
+          ./desktop-pc/hardware-configuration.nix
         ];
       };
     };
