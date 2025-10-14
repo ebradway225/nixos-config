@@ -31,6 +31,7 @@
   programs.fzf.enable = true;
 
   home.packages = with pkgs; [
+    eza
     google-chrome
     kdePackages.kate
     nil
