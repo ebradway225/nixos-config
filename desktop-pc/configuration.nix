@@ -124,6 +124,9 @@
     };
   };
 
+  # Enable xone driver.
+  hardware.xone.enable = true;
+
   # Enable flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
