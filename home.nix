@@ -31,6 +31,7 @@
   programs.fzf.enable = true;
 
   home.packages = with pkgs; [
+    discord
     eza
     google-chrome
     kdePackages.kate
