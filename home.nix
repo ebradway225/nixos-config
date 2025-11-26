@@ -34,6 +34,7 @@
     discord
     eza
     google-chrome
+    helix
     kdePackages.kate
     nil
   ];
