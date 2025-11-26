@@ -173,6 +173,13 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHrjbgjxWslXGZttleWWd6HJWgFlOthbbSq9q/EElBFN ethanb@asus-gaming-laptop"
   ];
 
+  programs.ssh.extraConfig = "
+    Host github.com
+        PreferredAuthentications publickey
+        IdentityFile ~/.ssh/github
+        User git
+  ";
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
