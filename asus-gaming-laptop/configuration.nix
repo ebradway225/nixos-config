@@ -183,6 +183,13 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
+  programs.ssh.extraConfig = "
+    Host github.com
+        PreferredAuthentications publickey
+        IdentityFile ~/.ssh/github
+        User git
+  ";
+
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
