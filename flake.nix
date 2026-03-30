@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     alejandra.url = "github:kamadorueda/alejandra/4.0.0";
     alejandra.inputs.nixpkgs.follows = "nixpkgs";
@@ -14,7 +15,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     git-hooks.url = "github:cachix/git-hooks.nix";
-    git-hooks.inputs.nixpkgs.follows = "nixpkgs";
+    git-hooks.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     treefmt.url = "github:numtide/treefmt";
     treefmt.inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +29,7 @@
     alejandra,
     disko,
     nixpkgs,
+    nixpkgs-unstable,
     home-manager,
     git-hooks,
     treefmt,
@@ -55,7 +57,7 @@
         modules = [
           ./asus-gaming-laptop/configuration.nix
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = {inherit inputs;};
       };
 
       # nixos-anywhere --flake .#desktop-pc --generate-hardware-config nixos-generate-config ./desktop-pc/hardware-configuration.nix desktop-pc
@@ -66,7 +68,7 @@
           disko.nixosModules.disko
           ./desktop-pc/hardware-configuration.nix
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = {inherit inputs;};
       };
     };
 
@@ -74,13 +76,25 @@
       "ethanb@asus-gaming-laptop" = lib.homeManagerConfiguration {
         modules = [./home.nix];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
+        extraSpecialArgs = {
+          inherit inputs;
+          unstable = import inputs.nixpkgs-unstable {
+            system = "x86_64-linux";
+            config = {allowUnfree = true;};
+          };
+        };
       };
 
       "ethanb@desktop-pc" = lib.homeManagerConfiguration {
         modules = [./home.nix];
         pkgs = nixpkgs.legacyPackages.x86_64-linux;
-        extraSpecialArgs = {inherit inputs;};
+        extraSpecialArgs = {
+          inherit inputs;
+          unstable = import inputs.nixpkgs-unstable {
+            system = "x86_64-linux";
+            config = {allowUnfree = true;};
+          };
+        };
       };
     };
   };
