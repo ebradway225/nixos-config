@@ -12,6 +12,17 @@
 
     home-manager.url = "github:nix-community/home-manager/release-25.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    git-hooks.url = "github:cachix/git-hooks.nix";
+    git-hooks.inputs.nixpkgs.follows = "nixpkgs";
+
+    treefmt.url = "github:numtide/treefmt";
+    treefmt.inputs.nixpkgs.follows = "nixpkgs";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
+
+    systems.url = "github:nix-systems/default";
   };
 
   outputs = inputs @ {
@@ -19,6 +30,10 @@
     disko,
     nixpkgs,
     home-manager,
+    git-hooks,
+    treefmt,
+    nixos-hardware,
+    systems,
     ...
   }: {
     nixosConfigurations = {
