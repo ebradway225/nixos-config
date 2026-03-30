@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  unstable,
   ...
 }: {
   # Allow unfree packages
@@ -33,15 +34,16 @@
   # Install fzf.
   programs.fzf.enable = true;
 
-  home.packages = with pkgs; [
-    discord
-    eza
-    google-chrome
-    helix
-    kdePackages.kate
-    nil
-    opencode
-  ];
+  home.packages = with pkgs;
+    [
+      discord
+      eza
+      google-chrome
+      helix
+      kdePackages.kate
+      nil
+    ]
+    ++ [unstable.opencode];
 
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
