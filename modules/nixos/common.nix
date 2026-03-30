@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -84,6 +84,9 @@
         IdentityFile ~/.ssh/github
         User git
   '';
+
+  # Home Manager
+  environment.systemPackages = [ inputs.home-manager.packages.${pkgs.system}.home-manager ];
 
   # State version
   system.stateVersion = "25.05";

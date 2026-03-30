@@ -55,6 +55,7 @@
         modules = [
           ./asus-gaming-laptop/configuration.nix
         ];
+        specialArgs = { inherit inputs; };
       };
 
       # nixos-anywhere --flake .#desktop-pc --generate-hardware-config nixos-generate-config ./desktop-pc/hardware-configuration.nix desktop-pc
@@ -65,6 +66,7 @@
           disko.nixosModules.disko
           ./desktop-pc/hardware-configuration.nix
         ];
+        specialArgs = { inherit inputs; };
       };
     };
 
