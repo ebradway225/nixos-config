@@ -40,6 +40,7 @@
     helix
     kdePackages.kate
     nil
+    opencode
   ];
 
   # This value determines the Home Manager release that your
