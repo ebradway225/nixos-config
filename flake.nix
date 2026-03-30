@@ -35,7 +35,21 @@
     nixos-hardware,
     systems,
     ...
-  }: {
+  }: let
+    forAllSystems = nixpkgs.lib.genAttrs (import systems);
+    lib = nixpkgs.lib // home-manager.lib;
+  in {
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+
+    checks = forAllSystems (system: {
+      pre-commit = inputs.git-hooks.lib.${system}.run {
+        src = ./.;
+        hooks = {
+          alejandra.enable = true;
+        };
+      };
+    });
+
     nixosConfigurations = {
       asus-gaming-laptop = nixpkgs.lib.nixosSystem rec {
         system = "x86_64-linux";
