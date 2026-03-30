@@ -20,7 +20,6 @@
     treefmt.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware";
-    nixos-hardware.inputs.nixpkgs.follows = "nixpkgs";
 
     systems.url = "github:nix-systems/default";
   };
@@ -55,17 +54,6 @@
         system = "x86_64-linux";
         modules = [
           ./asus-gaming-laptop/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.ethanb = ./home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-
-            environment.systemPackages = [alejandra.defaultPackage.${system}];
-          }
         ];
       };
 
@@ -75,19 +63,22 @@
         modules = [
           ./desktop-pc/configuration.nix
           disko.nixosModules.disko
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.ethanb = ./home.nix;
-
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-
-            environment.systemPackages = [alejandra.defaultPackage.${system}];
-          }
           ./desktop-pc/hardware-configuration.nix
         ];
+      };
+    };
+
+    homeConfigurations = {
+      "ethanb@asus-gaming-laptop" = lib.homeManagerConfiguration {
+        modules = [./home.nix];
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs;};
+      };
+
+      "ethanb@desktop-pc" = lib.homeManagerConfiguration {
+        modules = [./home.nix];
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs;};
       };
     };
   };
