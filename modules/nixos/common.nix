@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   # Bootloader
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -62,13 +67,13 @@
   };
 
   # Nix
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # User
   users.users.ethanb = {
     isNormalUser = true;
     description = "Ethan Bradway";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = ["networkmanager" "wheel"];
   };
 
   # Programs
@@ -86,7 +91,7 @@
   '';
 
   # Home Manager
-  environment.systemPackages = [ inputs.home-manager.packages.${pkgs.system}.home-manager ];
+  environment.systemPackages = [inputs.home-manager.packages.${pkgs.system}.home-manager];
 
   # State version
   system.stateVersion = "25.05";

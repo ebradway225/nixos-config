@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{
+  config,
+  pkgs,
+  ...
+}: {
   # NVIDIA drivers for laptop (Optimus)
   services.xserver.videoDrivers = [
     "modesetting"
